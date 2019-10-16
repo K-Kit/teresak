@@ -19,6 +19,8 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-netlify-cms',
+    'gatsby-plugin-theme-ui',
+    'gatsby-theme-style-guide',
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-lodash",
     {
@@ -26,6 +28,13 @@ module.exports = {
       options: {
         name: "assets",
         path: `${__dirname}/static/`
+      }
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "data",
+        path: `${__dirname}/data/`
       }
     },
     {

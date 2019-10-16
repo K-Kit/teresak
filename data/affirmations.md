@@ -1,4 +1,6 @@
 ---
+name: affirmations
+password: changeme
 affirmations:
   - main: 'Wellness is a practice, not a destination'
   - main: >-

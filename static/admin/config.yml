@@ -9,8 +9,11 @@ collections:
   - name: "Affirmations"
     label: "Affirmations"
     files:
-      - file: "src/pages/index.md"
+      - file: "data/affirmations.md"
         label: "Affirmations"
         name: "affirmations"
         fields:
-          - {label: "Tags", name: "tags", widget: "list"}
+          - {label: "affirmations", name: "affirmations", widget: "list", fields: [
+            {name: 'main', widget: 'text'}
+          ]}
+          - {name: "password", widget: string}

@@ -43,106 +43,106 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 };
 
-exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions;
-  const postPage = path.resolve("src/templates/post.jsx");
-  const tagPage = path.resolve("src/templates/tag.jsx");
-  const categoryPage = path.resolve("src/templates/category.jsx");
+// exports.createPages = async ({ graphql, actions }) => {
+//   const { createPage } = actions;
+//   const postPage = path.resolve("src/templates/post.jsx");
+//   const tagPage = path.resolve("src/templates/tag.jsx");
+//   const categoryPage = path.resolve("src/templates/category.jsx");
 
-  const markdownQueryResult = await graphql(
-    `
-      {
-        allMarkdownRemark {
-          edges {
-            node {
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-                tags
-                category
-                date
-              }
-            }
-          }
-        }
-      }
-    `
-  );
+//   const markdownQueryResult = await graphql(
+//     `
+//       {
+//         allMarkdownRemark {
+//           edges {
+//             node {
+//               fields {
+//                 slug
+//               }
+//               frontmatter {
+//                 title
+//                 tags
+//                 category
+//                 date
+//               }
+//             }
+//           }
+//         }
+//       }
+//     `
+//   );
 
-  if (markdownQueryResult.errors) {
-    console.error(markdownQueryResult.errors);
-    throw markdownQueryResult.errors;
-  }
+//   if (markdownQueryResult.errors) {
+//     console.error(markdownQueryResult.errors);
+//     throw markdownQueryResult.errors;
+//   }
 
-  const tagSet = new Set();
-  const categorySet = new Set();
+//   const tagSet = new Set();
+//   const categorySet = new Set();
 
-  const postsEdges = markdownQueryResult.data.allMarkdownRemark.edges;
+//   const postsEdges = markdownQueryResult.data.allMarkdownRemark.edges;
 
-  postsEdges.sort((postA, postB) => {
-    const dateA = moment(
-      postA.node.frontmatter.date,
-      siteConfig.dateFromFormat
-    );
+//   postsEdges.sort((postA, postB) => {
+//     const dateA = moment(
+//       postA.node.frontmatter.date,
+//       siteConfig.dateFromFormat
+//     );
 
-    const dateB = moment(
-      postB.node.frontmatter.date,
-      siteConfig.dateFromFormat
-    );
+//     const dateB = moment(
+//       postB.node.frontmatter.date,
+//       siteConfig.dateFromFormat
+//     );
 
-    if (dateA.isBefore(dateB)) return 1;
-    if (dateB.isBefore(dateA)) return -1;
+//     if (dateA.isBefore(dateB)) return 1;
+//     if (dateB.isBefore(dateA)) return -1;
 
-    return 0;
-  });
+//     return 0;
+//   });
 
-  postsEdges.forEach((edge, index) => {
-    if (edge.node.frontmatter.tags) {
-      edge.node.frontmatter.tags.forEach(tag => {
-        tagSet.add(tag);
-      });
-    }
+//   postsEdges.forEach((edge, index) => {
+//     if (edge.node.frontmatter.tags) {
+//       edge.node.frontmatter.tags.forEach(tag => {
+//         tagSet.add(tag);
+//       });
+//     }
 
-    if (edge.node.frontmatter.category) {
-      categorySet.add(edge.node.frontmatter.category);
-    }
+//     if (edge.node.frontmatter.category) {
+//       categorySet.add(edge.node.frontmatter.category);
+//     }
 
-    const nextID = index + 1 < postsEdges.length ? index + 1 : 0;
-    const prevID = index - 1 >= 0 ? index - 1 : postsEdges.length - 1;
-    const nextEdge = postsEdges[nextID];
-    const prevEdge = postsEdges[prevID];
+//     const nextID = index + 1 < postsEdges.length ? index + 1 : 0;
+//     const prevID = index - 1 >= 0 ? index - 1 : postsEdges.length - 1;
+//     const nextEdge = postsEdges[nextID];
+//     const prevEdge = postsEdges[prevID];
 
-    createPage({
-      path: edge.node.fields.slug,
-      component: postPage,
-      context: {
-        slug: edge.node.fields.slug,
-        nexttitle: nextEdge.node.frontmatter.title,
-        nextslug: nextEdge.node.fields.slug,
-        prevtitle: prevEdge.node.frontmatter.title,
-        prevslug: prevEdge.node.fields.slug
-      }
-    });
-  });
+//     createPage({
+//       path: edge.node.fields.slug,
+//       component: postPage,
+//       context: {
+//         slug: edge.node.fields.slug,
+//         nexttitle: nextEdge.node.frontmatter.title,
+//         nextslug: nextEdge.node.fields.slug,
+//         prevtitle: prevEdge.node.frontmatter.title,
+//         prevslug: prevEdge.node.fields.slug
+//       }
+//     });
+//   });
 
-  tagSet.forEach(tag => {
-    createPage({
-      path: `/tags/${_.kebabCase(tag)}/`,
-      component: tagPage,
-      context: {
-        tag
-      }
-    });
-  });
-  categorySet.forEach(category => {
-    createPage({
-      path: `/categories/${_.kebabCase(category)}/`,
-      component: categoryPage,
-      context: {
-        category
-      }
-    });
-  });
-};
+//   tagSet.forEach(tag => {
+//     createPage({
+//       path: `/tags/${_.kebabCase(tag)}/`,
+//       component: tagPage,
+//       context: {
+//         tag
+//       }
+//     });
+//   });
+//   categorySet.forEach(category => {
+//     createPage({
+//       path: `/categories/${_.kebabCase(category)}/`,
+//       component: categoryPage,
+//       context: {
+//         category
+//       }
+//     });
+//   });
+// };

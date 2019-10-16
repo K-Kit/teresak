@@ -6,7 +6,9 @@
   "dependencies": {
     "@emotion/core": "^10.0.21",
     "@mdx-js/react": "^1.5.1",
+    "@rebass/forms": "^4.0.6",
     "@rebass/layout": "^4.0.6",
+    "@rebass/preset": "^4.0.5",
     "@theme-ui/presets": "^0.2.44",
     "gatsby": "^2.15.28",
     "gatsby-image": "^2.2.23",
