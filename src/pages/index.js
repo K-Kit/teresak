@@ -110,7 +110,7 @@ const Index = ({...props}) => {
         Don't have your code yet? Sign up now to get your free access code!
         <Input name='email' value={email} onChange={e => setemail(e.target.value)} placeholder='yourname@email.com' />
         <StyledButton onClick={() => {
-          addToMailchimp(email).then(
+          addToMailchimp(email, {FNAME: 'null', LNAME: 'null'}).then(
             data => console.log(data)
           ).then(alert(`Success! Check your email: ${email} for your access code.`))
           
