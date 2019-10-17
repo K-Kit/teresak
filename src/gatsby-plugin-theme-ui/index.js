@@ -1,5 +1,9 @@
 import theme from '@rebass/preset'
 
 export default {
-    ...theme
+    ...theme,
+    colors: {
+        ...theme.colors,
+        background: '#99badd'
+    }
 }

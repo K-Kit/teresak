@@ -18,6 +18,12 @@ module.exports = {
     }
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+          endpoint: 'https://teresakeever.us17.list-manage.com/subscribe/post?u=f07ee148d7ba00a85876aff07&amp;id=f1204868a0', // add your MC list endpoint here; see instructions below
+      },
+  },
     'gatsby-plugin-netlify-cms',
     'gatsby-plugin-theme-ui',
     'gatsby-theme-style-guide',
